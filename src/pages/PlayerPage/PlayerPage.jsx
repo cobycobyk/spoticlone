@@ -10,7 +10,7 @@ export default function PlayerPage({ spotify }) {
         <Sidebar />
         <Body spotify={spotify} />
       </div>
-      <Footer />
+      <Footer spotify={spotify} />
     </div>
   );
 }
