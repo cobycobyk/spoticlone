@@ -12,7 +12,7 @@ import { Grid, Slider } from "@material-ui/core";
 import { useDataLayerValue } from "../../utilities/DataLayer";
 
 export default function Footer({ spotify }) {
-  const [{ token, item, playing }, dispatch] = useDataLayerValue();
+  const [{ item, playing }, dispatch] = useDataLayerValue();
 
   useEffect(() => {
     spotify.getMyCurrentPlaybackState().then((r) => {
@@ -79,13 +79,13 @@ export default function Footer({ spotify }) {
       <div className="footer__left">
         <img
           className="footer__albumLogo"
-          src={item?.album.images[0]}
+          src={item?.album.images[0].url}
           alt={item?.name}
         />
         {item ? (
           <div className="footer__songInfo">
             <h4>{item.name}</h4>
-            <p>{item.artist.map((artist) => artist.name).join(", ")}</p>
+            <p>{item.artists.map((artist) => artist.name).join(", ")}</p>
           </div>
         ) : (
           <div className="footer__songInfo">

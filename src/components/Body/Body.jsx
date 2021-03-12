@@ -11,7 +11,26 @@ export default function Body({ spotify }) {
 
   const playPlaylist = (id) => {
     spotify
-      .play({ context_uri: `spotify.playlist:37i9dQZEVXcPXk4JRrk4fY` })
+      .play({ context_uri: `spotify:playlist:37i9dQZEVXcPXk4JRrk4fY` })
+      .then((res) => {
+        spotify.getMyCurrentPlayingTrack().then((res) => {
+          dispatch({
+            type: "SET_ITEM",
+            item: res.item,
+          });
+          dispatch({
+            type: "SET_PLAYING",
+            playing: true,
+          });
+        });
+      });
+  };
+
+  const playSong = (id) => {
+    spotify
+      .play({
+        uris: [`spotify:track:${id}`],
+      })
       .then((res) => {
         spotify.getMyCurrentPlayingTrack().then((r) => {
           dispatch({
@@ -24,21 +43,6 @@ export default function Body({ spotify }) {
           });
         });
       });
-  };
-
-  const playSong = (id) => {
-    spotify.play({ uris: [`spotify:track:${id}`] }).then((res) => {
-      spotify.getMyCurrentPlayingTrack().then((r) => {
-        dispatch({
-          type: "SET_ITEM",
-          item: r.item,
-        });
-        dispatch({
-          type: "SET_PLAYING",
-          playing: true,
-        });
-      });
-    });
   };
 
   return (

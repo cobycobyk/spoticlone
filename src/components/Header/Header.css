@@ -19,6 +19,9 @@
   border: none;
   width: 100%;
 }
+.header__left > input:focus {
+  outline: 0;
+}
 
 .header__right {
   display: flex;

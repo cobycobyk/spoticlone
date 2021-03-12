@@ -37,6 +37,11 @@ export default function App() {
         })
       );
 
+      dispatch({
+        type: "SET_SPOTIFY",
+        spotify: spotify,
+      });
+
       spotify.getMe().then((user) => {
         dispatch({
           type: "SET_USER",
@@ -55,8 +60,7 @@ export default function App() {
 
   return (
     <div className="app">
-      {!token && <LoginPage />}
-      {token && <PlayerPage spotify={spotify} />}
+      {token ? <PlayerPage spotify={spotify} /> : <LoginPage />}
     </div>
   );
 }
